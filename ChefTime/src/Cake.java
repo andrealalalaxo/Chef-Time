@@ -1,4 +1,4 @@
 
-public class Cake {
+public class Cake extends RecipeBook{
 
 }

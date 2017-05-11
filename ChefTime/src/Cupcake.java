@@ -1,4 +1,4 @@
 
-public class Cupcake {
+public class Cupcake extends RecipeBook{
 
 }

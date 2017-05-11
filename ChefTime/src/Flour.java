@@ -1,4 +1,4 @@
 
-public class Flour {
+public class Flour extends Ingredient{
 
 }

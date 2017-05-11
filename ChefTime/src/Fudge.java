@@ -1,4 +1,4 @@
 
-public class Fudge {
+public class Fudge extends RecipeBook{
 
 }

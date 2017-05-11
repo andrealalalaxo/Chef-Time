@@ -1,4 +1,4 @@
 
-public class Sugar {
+public class Sugar extends Ingredient{
 
 }

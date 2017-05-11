@@ -1,4 +1,4 @@
 
-public class Egg {
+public class Egg extends Ingredient{
 
 }

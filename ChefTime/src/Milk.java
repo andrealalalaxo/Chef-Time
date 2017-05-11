@@ -1,4 +1,4 @@
 
-public class Milk {
+public class Milk extends Ingredient{
 
 }

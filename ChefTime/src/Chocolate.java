@@ -1,4 +1,4 @@
 
-public class Chocolate {
+public class Chocolate extends Ingredient{
 
 }

@@ -1,4 +1,4 @@
 
-public class FoodColor {
+public class FoodColor extends Ingredient{
 
 }
