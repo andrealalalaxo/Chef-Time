@@ -1,5 +1,6 @@
 
 import java.awt.event.KeyAdapter;
+import java.awt.event.MouseEvent;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -45,6 +46,19 @@ public class ChefTime extends PApplet {
 		bowl = loadImage("bowl.png");
 		image(bowl, 150, 200, 400, 200);
 
+	}
+	
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int mx = e.getX();
+		int my = e.getY();
+		
+		double ratioX = (double)width/800;
+		double ratioY = (double)height/600;
+		/*if (m.isPointInsideImage(mx/ratioX, my/ratioY) == true) {
+			m.moveToLocation(500, 325);
+		}
+		*/
 	}
 	
 }
