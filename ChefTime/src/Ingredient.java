@@ -7,7 +7,9 @@ public class Ingredient {
 	private int x, y, width, height;
 	private String fileName;
 	
-	
+	public Ingredient(){
+		
+	}
 	public Ingredient(Image img, int x, int y, int width, int height) {
 		this.img = img;
 		this.x = x;
