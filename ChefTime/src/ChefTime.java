@@ -72,7 +72,8 @@ public class ChefTime extends PApplet {
 	  PImage chocolate, eggs, flour, food_coloring, milk, bowl;
 		chocolate = loadImage("chocolate.png");
 		image(chocolate, 50, 50, 50, 50);
-		
+		eggs = loadImage("eggs.png");
+		image(eggs, 50, 100, 50, 50);
 		flour = loadImage("flour.png");
 		image(flour, 50,150, 50, 50);
 		food_coloring = loadImage("food_coloring.png");

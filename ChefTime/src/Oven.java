@@ -1,27 +1,60 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
+//import java.util.Timer;
+//mport java.util.TimerTask;
 import javax.swing.*;
-public class Oven {
-	private Timer t;
-	private double bakeTime;
+public class Oven implements ActionListener {
+	private Timer timer;
+	private int setTime; //time the pastry needs to be baked
+	private int bakeTime; //time the pastry was actually baked
 	
-	
-	public Oven(double time) {
-		//Timer t = new Timer();
+	public Oven(int time) {
+		super();
+		bakeTime = 0;
+		
+		setTime = time;
+		timer = new Timer(1000, this);
 		
 	}
+	/*
+	public void start() {
+		timer.schedule(new TimerTask() {
+			public void run() {
+				bake();
+			}
+		},bakeTime);
+		
+		
+		
+		
+	}
+	*/
 	
-	public void bake() {
-		t.start();
+	public void setTime(int i) {
+		setTime = i;
+	}
+
+	public void startBaking() {
+		timer.start();
 	}
 	
 	public void stop() {
-		t.stop();
+		timer.stop();
 	}
 	
-	public double getBakeTime() {
-		return bakeTime;
+	public double getSetTime() {
+		return setTime;
+	}
+
+	public int getDifference() { 
+		return Math.abs(setTime - bakeTime);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		bakeTime++;
+		
 	}
 	
 	

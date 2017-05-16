@@ -23,6 +23,7 @@ public class Ingredient {
 		
 	}
 	
+
 	public boolean isPointInside(double x, double y){
 		if(x > this.x || x < this.x + width || y > this.y || y < this.y + height){
 			return true;
@@ -30,6 +31,12 @@ public class Ingredient {
 			return false;
 		}
 	}
+
+	public void released() {
+		
+	}
+	
+
 	
 	public void draw(PApplet drawer) {
 		drawer.loadImage(fileName);
