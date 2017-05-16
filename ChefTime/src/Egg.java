@@ -18,8 +18,9 @@ public class Egg extends Ingredient implements ActionListener {
 	 private JComponent surface; // for repainting when we make changes to his image
 	  private Timer actionTimer;
 	  
-	  private Image sprites;
-	  private Rectangle[] spriteRects;
+	  private Image egg;
+	  private Image eggy;
+	  private Image[] sprite;
 	  
 	  // The bottom left corner of Eggy.
 	  private int x, y;
@@ -31,20 +32,21 @@ public class Egg extends Ingredient implements ActionListener {
 
 	 
 	 public Egg(int x, int y, JComponent surface) {
-		  sprites = new ImageIcon("eggs.png").getImage();
+		  egg = new ImageIcon("eggs.png").getImage();
+		  eggy = new ImageIcon("eggy.png").getImage();
+		 
+		  sprite = new Image[2]; // Coordinates of each action within the sprite sheet image
+		  sprite[0] = egg;
+		  sprite[1] = eggy;
 		  
-		  spriteRects = new Rectangle[3]; // Coordinates of each action within the sprite sheet image
-		  spriteRects[0] = new Rectangle(0,77,41,46);
-		  spriteRects[1] = new Rectangle(468,86,61,59);
-		  spriteRects[2] = new Rectangle(413,90,53,55);
 		  
 		  this.x = x;
 		  this.y = y;
-		  width =  spriteRects[0].width;   // Default width and height is the width and height of the first image loaded from the sprite sheet
-		  height =  spriteRects[0].height;
+		  //width =  sprite[0].width;   // Default width and height is the width and height of the first image 
+		 // height =  sprite[0].height;
 				
-		  width *= 4;  // We scale the size of Link up x4 for visibility
-		  height *= 4;
+		 // width *= 4;  // We scale the size of Link up x4 for visibility
+		 // height *= 4;
 		  
 		  action = 0;
 		  
@@ -72,12 +74,12 @@ public class Egg extends Ingredient implements ActionListener {
 	  }
 
 	  /*
-	   * Draw link using the correct sprite.
+	   * Draw egg using the correct sprite.
 	   */
 	  public void draw(Graphics2D g2, ImageObserver io) {
-		  double xScale = (double)width / spriteRects[0].width;
-		  double yScale = (double)height / spriteRects[0].height;
-		  g2.drawImage(sprites, x,(int)(y-yScale*spriteRects[action].height),(int)(x+xScale*spriteRects[action].width),y,spriteRects[action].x,spriteRects[action].y,spriteRects[action].x+spriteRects[action].width,spriteRects[action].y+spriteRects[action].height,io);
+		 // double xScale = (double)width / sprite[0].width;
+		 // double yScale = (double)height / sprite[0].height;
+		 // g2.drawImage(egg, x,(int)(y-yScale*sprite[action].height),(int)(x+xScale*sprite[action].width),y,sprite[action].x,sprite[action].y,sprite[action].x+sprite[action].width,sprite[action].y+sprite[action].height(),io);
 	  }
 
 	  @Override

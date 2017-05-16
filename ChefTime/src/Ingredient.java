@@ -19,6 +19,11 @@ public class Ingredient {
 		
 	}
 	
+	public void released() {
+		
+	}
+	
+	
 	public void draw(PApplet drawer) {
 		drawer.loadImage(fileName);
 		
