@@ -82,10 +82,8 @@ public class Chocolate extends Ingredient implements ActionListener {
 		 // g2.drawImage(egg, x,(int)(y-yScale*sprite[action].height),(int)(x+xScale*sprite[action].width),y,sprite[action].x,sprite[action].y,sprite[action].x+sprite[action].width,sprite[action].y+sprite[action].height(),io);
 	  }
 
-	  @Override
-	  public void actionPerformed(ActionEvent arg0) {
+	  public void actionPerformed(ActionEvent arg0){
 		  still();
 		  surface.repaint();
-
 	  }
 }
