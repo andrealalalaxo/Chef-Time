@@ -12,6 +12,7 @@ public class Oven implements ActionListener {
 	public Oven(int time) {
 		super();
 		bakeTime = 0;
+		
 		setTime = time;
 		timer = new Timer(1000, this);
 		
