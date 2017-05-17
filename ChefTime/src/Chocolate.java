@@ -31,30 +31,11 @@ public class Chocolate extends Ingredient implements ActionListener {
 	 
 
 	 
-	 public Chocolate(int x, int y, JComponent surface) {
-		  chocolate = new ImageIcon("chocolate.png").getImage();
-		  batter = new ImageIcon("batter.png").getImage();
-		 
-		  sprite = new Image[2]; // Coordinates of each action within the sprite sheet image
-		  sprite[0] = chocolate;
-		  sprite[1] = batter;
-		  
-		  
-		  this.x = x;
-		  this.y = y;
-		  //width =  sprite[0].width;   // Default width and height is the width and height of the first image 
-		 // height =  sprite[0].height;
-				
-		 // width *= 4;  // We scale the size of Link up x4 for visibility
-		 // height *= 4;
-		  
-		  action = 0;
-		  
-		  this.surface = surface;
-		  actionTimer = new Timer(ACTION_TIMEOUT,this);
-		  actionTimer.setRepeats(false);
-	  }
-	 
+	 public Chocolate(PImage img, int x, int y, int width, int height) {
+			super(img, x, y, width, height);
+
+		
+		 }
 	 /*
 	   * Chocolate on left column with ingredients, doing nothing.
 	   */
