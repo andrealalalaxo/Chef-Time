@@ -3,18 +3,19 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.KeyAdapter;
+
 
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.event.MouseEvent;
+import processing.event.KeyEvent;
 
 
 public class ChefTime extends PApplet {
 	
 
 	private Ingredient egg, flour, chocolate, foodColor, sugar, milk;
-	
+	private Oven oven;
 	
 	private Ingredient currentDrag;
 	private int dragOffsetX, dragOffsetY;
@@ -29,7 +30,9 @@ public class ChefTime extends PApplet {
 		milk = new Ingredient (50, 50, 50, 50);
 		sugar= new Ingredient (50, 50, 50, 50);
 		foodColor= new Ingredient (50, 50, 50, 50);
-
+		oven = new Oven(10);
+		//oven.startBaking(); //begin baking timer for 10 seconds
+		
 		
 		
 		currentDrag = null;
@@ -126,6 +129,26 @@ public class ChefTime extends PApplet {
 			currentDrag.y = arg0.getY()-dragOffsetY;
 			redraw();
 		}
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		int code = e.getKeyCode();
+		if (code == 'O') { //When O is pressed, the food is taken out of the oven so it stops baking.
+			//System.out.println("Key O is pressed.");
+			oven.stop();
+		}
+			
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
