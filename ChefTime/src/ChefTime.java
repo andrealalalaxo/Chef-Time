@@ -227,7 +227,8 @@ public class ChefTime extends PApplet {
 			bowlimg =  loadImage("batter.png");
 			
 		}
-		currentDrag = null;
+		
+		//currentDrag = null;
 		redraw();
 		egg.released();
 		

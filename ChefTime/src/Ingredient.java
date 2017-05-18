@@ -32,9 +32,10 @@ public class Ingredient {
 
 	public boolean isInBowl(double x, double y){
 		if(x > 250 && x < 500 && y > 300 && y < 400){
-			System.out.println("in Bowl");
+		//	System.out.println("in Bowl");
 			return true;
 		} else {
+			System.out.println("not in bowl");
 			return false;
 		}
 	}
