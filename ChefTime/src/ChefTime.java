@@ -101,7 +101,17 @@ public class ChefTime extends PApplet {
 	  
 		
 		
-		  update(mouseX, mouseY);
+
+		//call draw on each ingredient
+		egg.draw(this);
+		flour.draw(this);
+		sugar.draw(this);
+		foodColor.draw(this);
+		milk.draw(this);
+		chocolate.draw(this);
+		image(bowlimg, 250, 300, 250, 100);
+		image(ovenimg, 200, 10, 200, 200);
+		update(mouseX, mouseY);
 		  //background(currentColor);
 		  
 		  if (rectOver) {
@@ -130,15 +140,6 @@ public class ChefTime extends PApplet {
 		  fill(250, 0, 0);
 		  
 		  text(this.oven.scoreString, scoreX, scoreY);
-
-		//call draw on each ingredient
-		egg.draw(this);
-		flour.draw(this);
-		sugar.draw(this);
-		foodColor.draw(this);
-		milk.draw(this);
-		chocolate.draw(this);
-		image(bowlimg, 250, 300, 250, 100);
 	}
 
 
