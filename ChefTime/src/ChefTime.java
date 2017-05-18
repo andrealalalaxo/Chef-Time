@@ -221,9 +221,16 @@ public class ChefTime extends PApplet {
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
+		currentDrag.isInBowl(arg0.getX(), arg0.getY());
+		if(currentDrag.isInBowl(arg0.getX(), arg0.getY())){
+			bowlimg =  loadImage("batter.png");
+			
+		}
 		currentDrag = null;
 		redraw();
 		egg.released();
+		
+		
 	}
 
 	public void mouseDragged(MouseEvent arg0) {

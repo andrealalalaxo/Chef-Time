@@ -32,18 +32,10 @@ public class Ingredient {
 
 	public boolean isInBowl(double x, double y){
 		if(x > 250 && x < 500 && y > 300 && y < 400){
+			System.out.println("in Bowl");
 			return true;
 		} else {
 			return false;
-		}
-	}
-	
-	public void toBatter(){
-		if(this.isInBowl(this.getX(), this.getY())){
-		//	PImage bowlImg =  loadImage("bowl.png");
-		//	this.setImg( loadImage("batter.png"));
-		} else {
-		
 		}
 	}
 	
