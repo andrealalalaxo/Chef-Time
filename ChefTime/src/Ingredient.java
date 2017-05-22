@@ -9,6 +9,7 @@ public class Ingredient {
 	private int y;
 	private int width;
 	private int height;
+	private boolean hide;
 	 
 	private PImage batterImg;
 	public Ingredient(PImage img, int x, int y, int width, int height) {
@@ -18,7 +19,7 @@ public class Ingredient {
 		this.width = width;
 		this.height = height;
 		this.img = img;
-		
+		hide = false;
 	}
 	
 
@@ -38,6 +39,14 @@ public class Ingredient {
 			System.out.println("not in bowl");
 			return false;
 		}
+	}
+	
+	public void hideImage() {
+		hide = true;
+		
+	}
+	public boolean isHidden() {
+		return hide;
 	}
 	
 	public void released() {

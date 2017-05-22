@@ -97,12 +97,24 @@ public class ChefTime extends PApplet {
 
 		if (screen == 1) {
 			// call draw on each ingredient
-			egg.draw(this);
+			if (egg.isHidden() == false) {
+				egg.draw(this);
+			}
+			if (flour.isHidden() == false) {
 			flour.draw(this);
+			}
+			if (sugar.isHidden() == false) {
 			sugar.draw(this);
+			}
+			if (foodColor.isHidden() == false) {
 			foodColor.draw(this);
+			}
+			if (milk.isHidden() == false) {
 			milk.draw(this);
+			}
+			if (chocolate.isHidden() == false) {
 			chocolate.draw(this);
+			}
 			image(bowlimg, 250, 300, 250, 100);
 			image(ovenimg, 200, 10, 200, 200);
 			update(mouseX, mouseY);
@@ -229,6 +241,7 @@ public class ChefTime extends PApplet {
 	//	currentDrag.isInBowl(e.getX(), e.getY());
 		if (currentDrag != null && currentDrag.isInBowl(e.getX(), e.getY()) ) {
 			bowlimg = loadImage("batter.png");
+			currentDrag.hideImage();
 			
 		}
 
