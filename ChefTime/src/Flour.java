@@ -17,7 +17,6 @@ public class Flour extends Ingredient implements ActionListener {
 	 private int action;
 	 private JComponent surface; // for repainting when we make changes to his image
 	  private Timer actionTimer;
-	  
 	  private Image flour;
 	  private Image batter;
 	  private Image[] sprite;
@@ -33,7 +32,7 @@ public class Flour extends Ingredient implements ActionListener {
 	 
 	 public Flour(PImage img, int x, int y, int width, int height) {
 			super(img, x, y, width, height);
-
+			super.setName("flour");
 		
 		 }
 	 

@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.event.KeyEvent;
@@ -25,22 +27,29 @@ public class ChefTime extends PApplet {
 	private int rectColor, circleColor, baseColor;
 	private int rectHighlight, circleHighlight;
 	private int currentColor;
+	private boolean baked; 
 	private boolean rectOver = false;
 	private boolean circleOver = false;
 	private boolean playOver = false;
+	private ArrayList<Integer> ingredients;
+	private String[] recipe = {"egg","flour", "milk", "food coloring", "sugar", "chocolate"};
+	private ArrayList<String> recipeIngredients;
+	private ArrayList<String> addedIngredients;
+	private int totalScore;
 
 	private int screen; // 0 for title screen, 1 for game screen, 2 for
 						// instructions
 
 	public ChefTime() {
 		super();
-
+		baked = false;
 		oven = new Oven(10);
 		// oven.startBaking(); //begin baking timer for 10 seconds
-
+		totalScore = 0;
 		screen = 0;
 		currentDrag = null;
-
+		addedIngredients = new ArrayList<>();
+		recipeIngredients = new ArrayList<>();
 		// methods for catching mouse events
 		runSketch(); // as soon as object is made, begin calling draw loop
 
@@ -61,12 +70,12 @@ public class ChefTime extends PApplet {
 
 		image(ovenimg, 200, 10, 200, 200);
 
-		egg = new Ingredient(eggimg, 50, 50, 50, 50);
-		flour = new Ingredient(flourimg, 50, 100, 50, 50);
-		chocolate = new Ingredient(chocolateimg, 50, 150, 50, 50);
-		foodColor = new Ingredient(foodColorimg, 50, 200, 50, 50);
-		milk = new Ingredient(milkimg, 50, 250, 50, 50);
-		sugar = new Ingredient(sugarimg, 50, 300, 50, 50);
+		egg = new Egg(eggimg, 50, 50, 50, 50);
+		flour = new Flour(flourimg, 50, 100, 50, 50);
+		chocolate = new Chocolate(chocolateimg, 50, 150, 50, 50);
+		foodColor = new FoodColor(foodColorimg, 50, 200, 50, 50);
+		milk = new Milk(milkimg, 50, 250, 50, 50);
+		sugar = new Sugar(sugarimg, 50, 300, 50, 50);
 		bowl = new Bowl(bowlimg, 250, 300, 250, 100);
 		// size(640, 360);
 		rectColor = color(30, 255, 30);
@@ -88,6 +97,26 @@ public class ChefTime extends PApplet {
 		ellipseMode(CENTER);
 
 	}
+	
+	public int countNumberOfWrongIngredients() {
+		int count = 0;
+		for (int i=0; i<recipeIngredients.size();i++) {
+			if (addedIngredients.size() != 0 && !addedIngredients.get(i).equals(recipeIngredients.get(i)) ) {
+				count++;
+			}
+			if (addedIngredients.size() == 0) {
+				count = recipeIngredients.size();
+			}
+		}
+		System.out.println("Wrong number of Ingredients: " + count);
+		return count;
+	}
+	
+	public int calculateScore() {
+		int score = oven.getBakingScore() + countNumberOfWrongIngredients()*(-10);
+		totalScore = score;
+		return score;
+	}
 
 	// The statements in draw() are executed 60 times a second until the
 	// program is stopped. Each statement is executed in
@@ -96,7 +125,9 @@ public class ChefTime extends PApplet {
 	public void draw() {
 		background(255); // Clear the screen with a white background
 
-		if (screen == 1) {
+		if (screen == 3) {
+			PImage playScreen = loadImage("playbackground.jpg");
+			image(playScreen, -15, 0, 670, 490);
 			bowl.draw(this);
 			// call draw on each ingredient
 			if (egg.isHidden() == false) {
@@ -140,9 +171,6 @@ public class ChefTime extends PApplet {
 			ellipse(circleX, circleY, circleSize, circleSize);
 
 			textSize(20);
-			// text("word");
-			// fill(0, 102, 153);
-			// text("word", 10, 60);
 			fill(0, 220, 180);
 			text(this.oven.counterString, counterX, counterY);
 			textSize(16);
@@ -154,17 +182,44 @@ public class ChefTime extends PApplet {
 			PImage titleScreen = loadImage("mainmenu.jpg");
 			image(titleScreen, 0, -10, 640, 480);
 			textSize(100);
-
-			text("Chef Time", 80, 200);
 			fill(0, 102, 153);
-			// rect(playX, playY, rectSize*8, rectSize*4);
+			text("Chef Time", 80, 200);
+			
 			textSize(30);
 			text("Press P to play", 80, 300);
 			text("Press I for instructions", 80, 330);
 
 		}
 		if (screen == 2) {
-			text("Story", 250, 25);
+			PImage instructionScreen = loadImage("kitchen.jpg");
+			image(instructionScreen, 0, -10, 640, 480);
+			textSize(30);
+			
+			text("Instructions", 250, 25);
+			fill(0);
+			textSize(20);
+			text("Drag all the ingredients into the bowl in the correct order.", 50, 75);
+			text("Press O to move the bowl into the oven. To start baking,", 50, 100);
+			text("press the green button on the oven. Stop the oven after ", 50, 125);
+			text("time is up using the red button. Then press O to remove ", 50, 150);
+			text("the food. Accurately follow the recipe so your score isn't", 50, 175);
+			text("trash. ", 50, 200);
+			text("Press I to go back", 250, 250);
+		}
+		
+		if (screen == 1) {
+			PImage instructionScreen = loadImage("floralpaper.png");
+			image(instructionScreen, 0, -10, 640, 480);
+			textSize(30);
+			text("Recipe", 250, 50);
+		
+			for (int i = 0; i < ingredients.size(); i++) {
+				text("Add: " + recipeIngredients.get(i), 50, 127+50*i);	
+			}
+			
+			
+			
+			
 		}
 	}
 
@@ -204,11 +259,21 @@ public class ChefTime extends PApplet {
 
 		if (rectOver) {
 			draw();
-			oven.startBaking();
+			if (bowl.isInOven() && baked == false) {
+				oven.startBaking();
+				baked = true;
+			}
 		}
 		if (circleOver) {
 			oven.stopBaking();
-			oven.getBakingScore();
+			if (baked == true) {
+				this.textSize(35);
+				this.fill(0);
+				this.text("Press O to remove your masterpiece", 230, 230);
+				countNumberOfWrongIngredients();
+				oven.getBakingScore();
+			}
+			
 			draw();
 		}
 
@@ -244,7 +309,7 @@ public class ChefTime extends PApplet {
 			//bowlimg = loadImage("batter.png");
 			bowl.fillBowl(loadImage("batter.png"));
 			currentDrag.hideImage();
-			
+			addedIngredients.add(currentDrag.getName());
 		}
 
 		// currentDrag = null;
@@ -277,8 +342,25 @@ public class ChefTime extends PApplet {
 			}
 		}
 		if (code == 'P') {
-			
-			screen = 1;
+			if (screen == 1) {
+				screen = 3;
+			} else if (screen == 0){
+				screen = 1;
+				int count = 0;
+				int n = (int)(Math.random()*3+4);
+				ingredients = new ArrayList<>();
+				while (count < n ) {
+					int a = (int)(Math.random()*6);
+					if (!ingredients.contains(a)) {
+						ingredients.add(a);
+						count++;
+					}
+				}
+				
+				for (int i = 0; i < ingredients.size(); i++) {
+					recipeIngredients.add(recipe[ingredients.get(i)]);	
+				}
+			}
 	
 		}
 		if (code == 'O') {
@@ -287,6 +369,12 @@ public class ChefTime extends PApplet {
 				
 			} else {
 				bowl.moveOutOven();
+				if (baked == true) {
+					calculateScore();
+					if (oven.getBakingScore() >= 80) {
+						bowl.cookFood(loadImage("cake.png"));
+					}
+				}
 			}
 		}
 		draw();

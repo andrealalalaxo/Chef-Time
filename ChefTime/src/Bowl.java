@@ -24,6 +24,10 @@ public class Bowl {
 	public void fillBowl(PImage img) {
 		this.img = img; 
 	}
+	
+	public void cookFood(PImage img) {
+		this.img = img;
+	}
 	public void moveToOven() {
 		xOven = x;
 		yOven = y;

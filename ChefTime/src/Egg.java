@@ -11,7 +11,6 @@ import javax.swing.Timer;
 
 public class Egg extends Ingredient {
 	
-
 	  private Timer actionTimer;
 	  
 	
@@ -22,6 +21,7 @@ public class Egg extends Ingredient {
 	
 	 public Egg(PImage img, int x, int y, int width, int height) {
 		super(img, x, y, width, height);
+		super.setName("egg");
 
 	
 	 }

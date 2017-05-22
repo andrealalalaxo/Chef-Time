@@ -17,7 +17,7 @@ public class Chocolate extends Ingredient implements ActionListener {
 	 private int action;
 	 private JComponent surface; // for repainting when we make changes to his image
 	  private Timer actionTimer;
-	  
+
 	  private Image chocolate;
 	  private Image batter;
 	  private Image[] sprite;
@@ -25,6 +25,7 @@ public class Chocolate extends Ingredient implements ActionListener {
 	  // The bottom left corner of Eggy.
 	  private int x, y;
 	  private int width, height;
+
 	 
 	 // Load the sounds from the disk. 
 	 private final EasySound2 chocSound = new EasySound2("sploosh.wav");
@@ -33,7 +34,7 @@ public class Chocolate extends Ingredient implements ActionListener {
 	 
 	 public Chocolate(PImage img, int x, int y, int width, int height) {
 			super(img, x, y, width, height);
-
+			super.setName("chocolate");
 		
 		 }
 	 /*

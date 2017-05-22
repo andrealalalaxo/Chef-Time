@@ -10,6 +10,7 @@ public class Ingredient {
 	private int width;
 	private int height;
 	private boolean hide;
+	private String name;
 	 
 	private PImage batterImg;
 	public Ingredient(PImage img, int x, int y, int width, int height) {
@@ -19,6 +20,7 @@ public class Ingredient {
 		this.width = width;
 		this.height = height;
 		this.img = img;
+		
 		hide = false;
 	}
 	
@@ -73,7 +75,13 @@ public class Ingredient {
 	public int getY(){
 		return this.y;
 	}
-
+	
+	public String getName() {
+		return name;
+	}
+	public String setName(String name) {
+		return this.name = name;
+	}
 	
 	public void draw(PApplet drawer) {
 		drawer.image(img, x, y, width, height);

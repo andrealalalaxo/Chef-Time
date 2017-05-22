@@ -21,7 +21,7 @@ public class Milk extends Ingredient implements ActionListener {
 	  private Image milk;
 	  private Image batter;
 	  private Image[] sprite;
-	  
+
 	  // The bottom left corner of Eggy.
 	  private int x, y;
 	  private int width, height;
@@ -33,7 +33,7 @@ public class Milk extends Ingredient implements ActionListener {
 	 
 	 public Milk(PImage img, int x, int y, int width, int height) {
 			super(img, x, y, width, height);
-
+			super.setName("milk");
 		
 		 }
 	 

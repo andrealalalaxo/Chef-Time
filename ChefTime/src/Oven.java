@@ -209,6 +209,7 @@ public class Oven implements ActionListener {
 			bakingScore = 0;
 		}
 		scoreString = "Score: " + bakingScore;
+		System.out.println(scoreString);
 		return bakingScore;
 	}
 	/*public int getDifference() { 
