@@ -175,8 +175,19 @@ public class ChefTime extends PApplet {
 			text(this.oven.counterString, counterX, counterY);
 			textSize(16);
 			fill(250, 0, 0);
-
+			
 			text(this.oven.scoreString, scoreX, scoreY);
+			if (baked == true) {
+				this.textSize(15);
+				this.fill(15);
+				this.text("Press O to remove your masterpiece", 170, 230);
+				if (!bowl.isInOven()) {
+					this.textSize(15);
+					this.fill(15);
+					this.text("Congrats, press R to see how you did!", 165, 250);
+				}
+			}
+			
 		}
 		if (screen == 0) {
 			PImage titleScreen = loadImage("mainmenu.jpg");
