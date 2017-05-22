@@ -124,7 +124,24 @@ public class ChefTime extends PApplet {
 	// line is executed again.
 	public void draw() {
 		background(255); // Clear the screen with a white background
-
+		if (screen == 4) {
+			PImage resultScreen = loadImage("resultscreen.jpg");
+			image(resultScreen, -15, 0, 670, 490);
+			this.textSize(50);
+			this.fill(15);
+			this.text("Score", 220, 50);
+			this.textSize(20);
+			this.text("Ingredient mixing score: ", 100, 100);
+			this.text(countNumberOfWrongIngredients()*(-10)+"", 400, 100);
+			this.text("Baking score: ", 100, 125);
+			this.text(oven.getBakingScore()+"", 400, 125);
+			this.text("Total score: ", 100, 150);
+			this.text(totalScore+"", 400, 150);
+			
+			if (totalScore < 0) {
+				
+			}
+		}
 		if (screen == 3) {
 			PImage playScreen = loadImage("playbackground.jpg");
 			image(playScreen, -15, 0, 670, 490);
@@ -386,6 +403,11 @@ public class ChefTime extends PApplet {
 						bowl.cookFood(loadImage("cake.png"));
 					}
 				}
+			}
+		}
+		if (code == 'R') {
+			if (baked && !bowl.isInOven()) {
+				screen = 4;
 			}
 		}
 		draw();
