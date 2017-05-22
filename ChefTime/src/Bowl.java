@@ -1,6 +1,11 @@
 import processing.core.PApplet;
 import processing.core.PImage;
-
+/**
+ * This class represents a bowl, which is where Ingredients should be
+ * dragged into.
+ * @author ssun681
+ *
+ */
 public class Bowl {
 	private PImage img;
 	private int x, xOven;
@@ -10,6 +15,14 @@ public class Bowl {
 	private boolean inOven;
 	 
 	private PImage batterImg;
+	/**
+	 * Creates a Bowl object with a set image, coordinate, and size
+	 * @param img The image of the bowl
+	 * @param x The x coordinate of the bowl
+	 * @param y The y coordinate of the bowl
+	 * @param width The width of the bowl
+	 * @param height The height of the bowl
+	 */
 	public Bowl(PImage img, int x, int y, int width, int height) {
 		
 		this.x = x;
@@ -20,14 +33,28 @@ public class Bowl {
 		inOven = false;
 
 	}
-	
+	/**
+	 * Replaces the original empty Bowl image with an image of a 
+	 * bowl with batter.
+	 * @param img The new image of the Bowl object
+	 */
 	public void fillBowl(PImage img) {
 		this.img = img; 
 	}
-	
+	/**
+	 * Replaces the original Bowl image with an image of a finished
+	 * food.
+	 * @param img The new image of the Bowl object
+	 */
 	public void cookFood(PImage img) {
 		this.img = img;
 	}
+	/**
+	 * Sets the coordinates of the Bowl to the coordinates of the Bowl
+	 * in the oven.
+	 * @post The x and y coordinates of the Bowl changes, as well as
+	 * its width and height.
+	 */
 	public void moveToOven() {
 		xOven = x;
 		yOven = y;
