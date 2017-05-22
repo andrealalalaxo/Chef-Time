@@ -8,6 +8,7 @@ public class ChefTime extends PApplet {
 
 	private Ingredient egg, flour, chocolate, foodColor, sugar, milk;
 	private Oven oven;
+	private Bowl bowl;
 	private PImage bowlimg, ovenimg;
 
 	private Ingredient currentDrag;
@@ -66,7 +67,7 @@ public class ChefTime extends PApplet {
 		foodColor = new Ingredient(foodColorimg, 50, 200, 50, 50);
 		milk = new Ingredient(milkimg, 50, 250, 50, 50);
 		sugar = new Ingredient(sugarimg, 50, 300, 50, 50);
-
+		bowl = new Bowl(bowlimg, 250, 300, 250, 100);
 		// size(640, 360);
 		rectColor = color(30, 255, 30);
 		rectHighlight = color(80, 200, 80);
@@ -96,6 +97,7 @@ public class ChefTime extends PApplet {
 		background(255); // Clear the screen with a white background
 
 		if (screen == 1) {
+			bowl.draw(this);
 			// call draw on each ingredient
 			if (egg.isHidden() == false) {
 				egg.draw(this);
@@ -115,7 +117,7 @@ public class ChefTime extends PApplet {
 			if (chocolate.isHidden() == false) {
 			chocolate.draw(this);
 			}
-			image(bowlimg, 250, 300, 250, 100);
+			//image(bowlimg, 250, 300, 250, 100);
 			image(ovenimg, 200, 10, 200, 200);
 			update(mouseX, mouseY);
 			// background(currentColor);
@@ -210,7 +212,6 @@ public class ChefTime extends PApplet {
 			draw();
 		}
 
-		// TODO Auto-generated method stub
 
 		int myX = e.getX();
 		int myY = e.getY();
@@ -240,7 +241,8 @@ public class ChefTime extends PApplet {
 	public void mouseReleased(MouseEvent e) {
 	//	currentDrag.isInBowl(e.getX(), e.getY());
 		if (currentDrag != null && currentDrag.isInBowl(e.getX(), e.getY()) ) {
-			bowlimg = loadImage("batter.png");
+			//bowlimg = loadImage("batter.png");
+			bowl.fillBowl(loadImage("batter.png"));
 			currentDrag.hideImage();
 			
 		}
@@ -267,19 +269,27 @@ public class ChefTime extends PApplet {
 		if (code == 'I') {
 			if (screen == 0) {
 				screen = 2;
-				draw();
+				
 			}
 			else if (screen == 2) {
 				screen = 0;
-				draw();
+				
 			}
 		}
 		if (code == 'P') {
 			
 			screen = 1;
-			draw();
+	
 		}
-
+		if (code == 'O') {
+			if (!bowl.isInOven()) {
+				bowl.moveToOven();
+				
+			} else {
+				bowl.moveOutOven();
+			}
+		}
+		draw();
 	}
 
 	@Override
