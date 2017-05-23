@@ -5,7 +5,11 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
-
+/**
+ * This class represents the kitchen, which contains the oven, ingredients, and the bowl.
+ * @author 
+ *
+ */
 public class ChefTime extends PApplet {
 
 	private Ingredient egg, flour, chocolate, foodColor, sugar, milk;
@@ -40,6 +44,9 @@ public class ChefTime extends PApplet {
 	private int screen; // 0 for title screen, 1 for game screen, 2 for
 						// instructions
 
+	/**
+	 * Creates a new ChefTime object, which represents a kitchen with an oven and ingredients.
+	 */
 	public ChefTime() {
 		super();
 		screen = 0;
@@ -58,6 +65,10 @@ public class ChefTime extends PApplet {
 
 	// The statements in the setup() function
 	// execute once when the program begins
+	/**
+	 * Loads all the images and initializes the ingredients, as well as the coordinates for the buttons on the oven.
+	 * @post The ingredients are initialized with an image, and the settings of the buttons on the oven are also initialized.
+	 */
 	public void setup() {
 		PImage flourimg = loadImage("flour.png");
 		PImage eggimg = loadImage("eggs.png");
@@ -98,7 +109,10 @@ public class ChefTime extends PApplet {
 		ellipseMode(CENTER);
 
 	}
-	
+	/**
+	 * Finds how many ingredients were placed incorrectly compared to the recipe.
+	 * @return The number of ingredients placed in the wrong order by the user.
+	 */
 	public int countNumberOfWrongIngredients() {
 		int count = 0;
 		for (int i=0; i<recipeIngredients.size();i++) {
@@ -112,7 +126,10 @@ public class ChefTime extends PApplet {
 		//System.out.println("Wrong number of Ingredients: " + count);
 		return count;
 	}
-	
+	/**
+	 * Calculates the total score using the baking score and the accuracy of the ingredients added.
+	 * @return Total game score
+	 */
 	public int calculateScore() {
 		int score = oven.getBakingScore() + countNumberOfWrongIngredients()*(-10) + recipeIngredients.size()*(10);
 		totalScore = score;
@@ -416,7 +433,7 @@ public class ChefTime extends PApplet {
 					if (baked == true) {
 						calculateScore();
 						if (oven.getBakingScore() >= 80) {
-							bowl.cookFood(loadImage("cake.png"));
+							bowl.cookFood(loadImage("cake.gif"));
 						}
 					}
 				}
