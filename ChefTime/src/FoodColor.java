@@ -30,22 +30,29 @@ public class FoodColor extends Ingredient implements ActionListener {
 	 private final Sound foodColorSound = new Sound("sploosh.wav");
 	 
 
-	 
+	 /**
+	  * makes an ingredient object food color
+	  * @param img image of food coloring
+	  * @param x x-coordinate of top left corner of image
+	  * @param y y-coordinate of top left corner of image
+	  * @param width width of image
+	  * @param height height of image
+	  */
 	 public FoodColor(PImage img, int x, int y, int width, int height) {
 			super(img, x, y, width, height);
 			super.setName("food color");
 		
 		 }
 	 
-	 /*
-	   * Chocolate on left column with ingredients, doing nothing.
+	 /**
+	   * food coloring on left column with ingredients, doing nothing.
 	   */
 	  public void still() {
 		  action = 0;
 	  }
 	  
-	  /*
-	   * Chocolate is dropped into bowl.
+	  /**
+	   * food coloring is dropped into bowl.
 	   */
 	  public void released() {
 		  if (action == 0) {
@@ -55,16 +62,9 @@ public class FoodColor extends Ingredient implements ActionListener {
 		  }
 	  }
 
-	  /*
-	   * Draw egg using the correct sprite.
-	   */
-	  public void draw(Graphics2D g2, ImageObserver io) {
-		 // double xScale = (double)width / sprite[0].width;
-		 // double yScale = (double)height / sprite[0].height;
-		 // g2.drawImage(egg, x,(int)(y-yScale*sprite[action].height),(int)(x+xScale*sprite[action].width),y,sprite[action].x,sprite[action].y,sprite[action].x+sprite[action].width,sprite[action].y+sprite[action].height(),io);
-	  }
-
-	  @Override
+	 /**
+	  * repaints screen
+	  */
 	  public void actionPerformed(ActionEvent arg0) {
 		  still();
 		  surface.repaint();

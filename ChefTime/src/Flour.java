@@ -29,6 +29,15 @@ public class Flour extends Ingredient implements ActionListener {
 	 private final Sound flourSound = new Sound("sploosh.wav");
 	 
 
+	 /**
+		 * Creates an Ingredient object (flour) with a set image, coordinate, and size
+		 * @param img The image of the flour
+		 * @param x x-coordinate of the top left corner of the image
+		 * @param y y-coordinate of the top left corner of the image
+		 * @param width the width of the image
+		 * @param height the heigth of the image
+		 * 
+		 */
 	 
 	 public Flour(PImage img, int x, int y, int width, int height) {
 			super(img, x, y, width, height);
@@ -36,15 +45,15 @@ public class Flour extends Ingredient implements ActionListener {
 		
 		 }
 	 
-	 /*
-	   * Chocolate on left column with ingredients, doing nothing.
+	 /**
+	   * flour on left column with ingredients, doing nothing.
 	   */
 	  public void still() {
 		  action = 0;
 	  }
 	  
-	  /*
-	   * Chocolate is dropped into bowl.
+	  /**
+	   * flour is dropped into bowl.
 	   */
 	  public void released() {
 		  if (action == 0) {
@@ -54,16 +63,10 @@ public class Flour extends Ingredient implements ActionListener {
 		  }
 	  }
 
-	  /*
-	   * Draw egg using the correct sprite.
+	  /**
+	   * @post surface is repainted
+	   * 
 	   */
-	  public void draw(Graphics2D g2, ImageObserver io) {
-		 // double xScale = (double)width / sprite[0].width;
-		 // double yScale = (double)height / sprite[0].height;
-		 // g2.drawImage(egg, x,(int)(y-yScale*sprite[action].height),(int)(x+xScale*sprite[action].width),y,sprite[action].x,sprite[action].y,sprite[action].x+sprite[action].width,sprite[action].y+sprite[action].height(),io);
-	  }
-
-	  @Override
 	  public void actionPerformed(ActionEvent arg0) {
 		  still();
 		  surface.repaint();

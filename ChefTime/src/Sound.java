@@ -12,7 +12,10 @@ public class Sound implements Runnable
   private SourceDataLine line = null;
   private byte[] audioBytes;
   private int numBytes;
-
+/**
+ * 
+ * @param fileName name of sound file being used
+ */
   public Sound(String fileName)
   {
     File  soundFile = new File(fileName);
@@ -55,11 +58,15 @@ public class Sound implements Runnable
       System.exit(1);
     }
   }
-
+/**
+ * runs the sound
+ */
   public void run() {
 	  line.write(audioBytes, 0, numBytes);
   }
-
+/**
+ * action is performed
+ */
   public void play()
   {
 	  line.flush();
