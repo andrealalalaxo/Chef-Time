@@ -42,11 +42,12 @@ public class ChefTime extends PApplet {
 
 	public ChefTime() {
 		super();
+		screen = 0;
 		baked = false;
 		oven = new Oven(10);
 		// oven.startBaking(); //begin baking timer for 10 seconds
 		totalScore = 0;
-		screen = 0;
+		
 		currentDrag = null;
 		addedIngredients = new ArrayList<>();
 		recipeIngredients = new ArrayList<>();
@@ -108,12 +109,12 @@ public class ChefTime extends PApplet {
 				count = recipeIngredients.size();
 			}
 		}
-		System.out.println("Wrong number of Ingredients: " + count);
+		//System.out.println("Wrong number of Ingredients: " + count);
 		return count;
 	}
 	
 	public int calculateScore() {
-		int score = oven.getBakingScore() + countNumberOfWrongIngredients()*(-10);
+		int score = oven.getBakingScore() + countNumberOfWrongIngredients()*(-10) + recipeIngredients.size()*(10);
 		totalScore = score;
 		return score;
 	}
@@ -129,17 +130,28 @@ public class ChefTime extends PApplet {
 			image(resultScreen, -15, 0, 670, 490);
 			this.textSize(50);
 			this.fill(15);
-			this.text("Score", 220, 50);
+			this.text("Score", 225, 50);
 			this.textSize(20);
 			this.text("Ingredient mixing score: ", 100, 100);
-			this.text(countNumberOfWrongIngredients()*(-10)+"", 400, 100);
+			this.text(countNumberOfWrongIngredients()*(-10) + recipeIngredients.size()*(10)+"", 400, 100);
 			this.text("Baking score: ", 100, 125);
 			this.text(oven.getBakingScore()+"", 400, 125);
 			this.text("Total score: ", 100, 150);
 			this.text(totalScore+"", 400, 150);
 			
-			if (totalScore < 0) {
-				
+			if (totalScore >= 140) {
+				this.text("Great job, you are an expert at mindlessly following recipes.", 10, 225);
+				this.text("Don't you feel proud!", 70, 250);
+			
+			}
+			else if (totalScore >= 110) {
+				this.text("Well, at least you tried. Good show! You're still an", 20, 225);
+				this.text("embarrassment to your family and the baking community.", 15, 250);
+			} else {
+				this.text("Congratulations, you are now qualified as a contestant on", 15, 225);
+				this.text("Worst Cooks in America. Next time, try opening your eyes", 15, 250);
+				this.text(" when you play, it might help. Gordon Ramsay is ashamed", 15, 275);
+				this.text("to breathe the same air as you!", 110, 300);
 			}
 		}
 		if (screen == 3) {
@@ -194,7 +206,7 @@ public class ChefTime extends PApplet {
 			fill(250, 0, 0);
 			
 			text(this.oven.scoreString, scoreX, scoreY);
-			if (baked == true) {
+			if (baked == true && !oven.isRunning()) {
 				this.textSize(15);
 				this.fill(15);
 				this.text("Press O to remove your masterpiece", 170, 230);
@@ -290,6 +302,9 @@ public class ChefTime extends PApplet {
 			if (bowl.isInOven() && baked == false) {
 				oven.startBaking();
 				baked = true;
+				if (oven.burnedFood()) {
+					
+				}
 			}
 		}
 		if (circleOver) {
@@ -396,11 +411,13 @@ public class ChefTime extends PApplet {
 				bowl.moveToOven();
 				
 			} else {
-				bowl.moveOutOven();
-				if (baked == true) {
-					calculateScore();
-					if (oven.getBakingScore() >= 80) {
-						bowl.cookFood(loadImage("cake.png"));
+				if (!oven.isRunning()) {
+					bowl.moveOutOven();
+					if (baked == true) {
+						calculateScore();
+						if (oven.getBakingScore() >= 80) {
+							bowl.cookFood(loadImage("cake.png"));
+						}
 					}
 				}
 			}
