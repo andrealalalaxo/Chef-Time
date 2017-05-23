@@ -26,7 +26,7 @@ public class Flour extends Ingredient implements ActionListener {
 	  private int width, height;
 	 
 	 // Load the sounds from the disk. 
-	 private final EasySound2 flourSound = new EasySound2("sploosh.wav");
+	 private final Sound flourSound = new Sound("sploosh.wav");
 	 
 
 	 

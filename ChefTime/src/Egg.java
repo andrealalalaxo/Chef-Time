@@ -15,7 +15,7 @@ public class Egg extends Ingredient {
 	  
 	
 	 // Load the sounds from the disk. 
-	 private final EasySound2 eggSound = new EasySound2("eggcrack.wav");
+	 private final Sound eggSound = new Sound("eggcrack.wav");
 	 
 
 	

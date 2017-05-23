@@ -27,7 +27,7 @@ public class Sugar extends Ingredient implements ActionListener {
 	  private int width, height;
 	 
 	 // Load the sounds from the disk. 
-	 private final EasySound2 sugarSound = new EasySound2("sploosh.wav");
+	 private final Sound sugarSound = new Sound("sploosh.wav");
 	 
 
 	 

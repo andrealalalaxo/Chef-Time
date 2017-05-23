@@ -27,7 +27,7 @@ public class FoodColor extends Ingredient implements ActionListener {
 	  private int width, height;
 	 
 	 // Load the sounds from the disk. 
-	 private final EasySound2 foodColorSound = new EasySound2("sploosh.wav");
+	 private final Sound foodColorSound = new Sound("sploosh.wav");
 	 
 
 	 

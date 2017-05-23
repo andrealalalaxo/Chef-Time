@@ -28,7 +28,7 @@ public class Chocolate extends Ingredient implements ActionListener {
 
 	 
 	 // Load the sounds from the disk. 
-	 private final EasySound2 chocSound = new EasySound2("sploosh.wav");
+	 private final Sound chocSound = new Sound("sploosh.wav");
 	 
 
 	 

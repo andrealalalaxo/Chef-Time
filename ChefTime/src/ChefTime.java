@@ -40,10 +40,17 @@ public class ChefTime extends PApplet {
 	private ArrayList<String> recipeIngredients;
 	private ArrayList<String> addedIngredients;
 	private int totalScore;
-
+	
 	private int screen; // 0 for title screen, 1 for game screen, 2 for
 						// instructions
 
+	private final Sound drop = new Sound("sploosh.wav");
+	private final Sound eggCrack = new Sound("eggcrack.wav");
+	//private  Sound ticking = new Sound("tick.wav");
+	private final Sound ding = new Sound("ding.wav");
+	private final Sound bigWin = new Sound("greatjob.wav");
+	private final Sound okayWin = new Sound("okayjob.wav");
+	private final Sound lose = new Sound("badjob.wav");
 	/**
 	 * Creates a new ChefTime object, which represents a kitchen with an oven and ingredients.
 	 */
@@ -164,18 +171,24 @@ public class ChefTime extends PApplet {
 			this.text(totalScore+"", 400, 150);
 			
 			if (totalScore >= 130) {
+				
 				this.text("Great job, you are an expert at mindlessly following recipes.", 10, 225);
 				this.text("Don't you feel proud!", 90, 250);
+			
 				
 			}
 			else if (totalScore >= 100) {
+				
 				this.text("Well, at least you tried. Good show! You're still an", 20, 225);
 				this.text("embarrassment to your family and the baking community.", 15, 250);
+			
 			} else {
+				
 				this.text("Congratulations, you are now qualified as a contestant on", 15, 225);
 				this.text("Worst Cooks in America. Next time, try opening your eyes", 15, 250);
 				this.text(" when you play, it might help. Gordon Ramsay is ashamed", 15, 275);
 				this.text("to breathe the same air as you!", 110, 300);
+				
 			}
 		}
 		if (screen == 3) {
@@ -347,12 +360,14 @@ public class ChefTime extends PApplet {
 			draw();
 			if (bowl.isInOven() && baked == false) {
 				oven.startBaking();
+				//ticking.play();
 				baked = true;
 				
 			}
 		}
 		if (circleOver) {
 			oven.stopBaking();
+			ding.play();
 			if (baked == true) {
 				if (oven.burnedFood()) {
 					this.textSize(35);
@@ -396,18 +411,21 @@ public class ChefTime extends PApplet {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-
+		if (screen == 3){
 		if (currentDrag != null && currentDrag.isInBowl(e.getX(), e.getY()) ) {
 
 			bowl.fillBowl(loadImage("batter.png"));
 			currentDrag.hideImage();
+			
 			addedIngredients.add(currentDrag.getName());
+			if (currentDrag.getName().equals("egg")) {
+				eggCrack.play();
+			} else {
+				drop.play();
+			}
 		}
-
-		// currentDrag = null;
 		redraw();
-		//egg.released();
-
+		}
 	}
 
 	public void mouseDragged(MouseEvent arg0) {

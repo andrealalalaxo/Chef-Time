@@ -27,7 +27,7 @@ public class Milk extends Ingredient implements ActionListener {
 	  private int width, height;
 	 
 	 // Load the sounds from the disk. 
-	 private final EasySound2 milkSound = new EasySound2("sploosh.wav");
+	 private final Sound milkSound = new Sound("sploosh.wav");
 	 
 
 	 
