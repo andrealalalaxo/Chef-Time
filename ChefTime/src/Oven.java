@@ -30,11 +30,11 @@ public class Oven implements ActionListener {
 	 * Creates an Oven object with a specified time the pastry should be baked.
 	 * @param time The set time that the pastry should be baked.
 	 */
-	public Oven(int time) {
+	public Oven(int time, int burnTime) {
 		super();
 		bakeTime = 0;
 		displayTime = 0;
-		burnedTime = 5;
+		burnedTime = burnTime;
 		bakingScore = 0;
 		burned = false;
 		setTime = time;
@@ -89,11 +89,17 @@ public class Oven implements ActionListener {
 	public double getSetTime() {
 		return setTime;
 	}
-	
+	/**
+	 * Checks if the oven is on.
+	 * @return true if the oven is on
+	 */
 	public boolean isRunning() {
 		return isOn;
 	}
-
+/**
+ * Calculates the score based on how well the pastry was baked.
+ * @return the baking score
+ */
 	public int getBakingScore() {
 		
 		int timeOff = (int)(Math.abs(remainingTime));
@@ -115,7 +121,10 @@ public class Oven implements ActionListener {
 		System.out.println(scoreString);
 		return bakingScore;
 	}
-	
+	/**
+	 * Checks to see if the food has been burned.
+	 * @return true if the food has been burned
+	 */
 	public boolean burnedFood() {
 		return burned;
 	}
@@ -138,9 +147,10 @@ public class Oven implements ActionListener {
 			// Sound
 			// Burned
 			System.out.println("Time is up!  Please remove the food." + remainingTime);
+			burned = true;
 			if (-remainingTime >= burnedTime) {
 				System.out.println("Burned!");
-				burned = true;
+				
 				this.stop();
 				isOn = false;
 				bakingScore = 0;

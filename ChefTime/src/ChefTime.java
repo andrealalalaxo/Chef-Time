@@ -51,7 +51,7 @@ public class ChefTime extends PApplet {
 		super();
 		screen = 0;
 		baked = false;
-		oven = new Oven(10);
+		oven = new Oven(10, 3);
 		// oven.startBaking(); //begin baking timer for 10 seconds
 		totalScore = 0;
 		
@@ -163,12 +163,12 @@ public class ChefTime extends PApplet {
 			this.text("Total score: ", 100, 150);
 			this.text(totalScore+"", 400, 150);
 			
-			if (totalScore >= 140) {
+			if (totalScore >= 130) {
 				this.text("Great job, you are an expert at mindlessly following recipes.", 10, 225);
-				this.text("Don't you feel proud!", 70, 250);
-			
+				this.text("Don't you feel proud!", 90, 250);
+				
 			}
-			else if (totalScore >= 110) {
+			else if (totalScore >= 100) {
 				this.text("Well, at least you tried. Good show! You're still an", 20, 225);
 				this.text("embarrassment to your family and the baking community.", 15, 250);
 			} else {
@@ -262,27 +262,37 @@ public class ChefTime extends PApplet {
 			text("Instructions", 250, 25);
 			fill(0);
 			textSize(20);
-			text("Drag all the ingredients into the bowl in the correct order.", 50, 75);
-			text("Press O to move the bowl into the oven. To start baking,", 50, 100);
-			text("press the green button on the oven. Stop the oven after ", 50, 125);
-			text("time is up using the red button. Then press O to remove ", 50, 150);
-			text("the food. Accurately follow the recipe so your score isn't", 50, 175);
-			text("trash. ", 50, 200);
-			text("Press I to go back", 250, 250);
+			text("Memorize the recipe, which disappears after a few seconds.", 50, 75);
+			text("Drag all the ingredients into the bowl in the correct order.", 50, 100);
+			text("Press O to move the bowl into the oven. To start baking,", 50, 125);
+			text("press the green button on the oven. Stop the oven after ", 50, 150);
+			text("time is up using the red button. Then press O to remove ", 50, 175);
+			text("the food. Accurately follow the recipe so your score isn't", 50, 200);
+			text("trash. ", 50, 225);
+			text("Press I to go back", 250, 275);
 		}
 		
 		if (screen == 1) {
 			PImage instructionScreen = loadImage("floralpaper.png");
 			image(instructionScreen, 0, -10, 640, 480);
+			PImage sweets = loadImage("sweets.gif");
+			image(sweets, 450, 300, 120, 90);
 			textSize(30);
 			text("Recipe", 250, 50);
 		
 			for (int i = 0; i < ingredients.size(); i++) {
 				text("Add: " + recipeIngredients.get(i), 50, 127+50*i);	
 			}
-			
-			
-			
+			new java.util.Timer().schedule( 
+			        new java.util.TimerTask() {
+			            @Override
+			            public void run() {
+			                screen = 3;
+			               
+			            }
+			        }, 
+			       2000 
+			);
 			
 		}
 	}
@@ -338,14 +348,17 @@ public class ChefTime extends PApplet {
 			if (bowl.isInOven() && baked == false) {
 				oven.startBaking();
 				baked = true;
-				if (oven.burnedFood()) {
-					
-				}
+				
 			}
 		}
 		if (circleOver) {
 			oven.stopBaking();
 			if (baked == true) {
+				if (oven.burnedFood()) {
+					this.textSize(35);
+					this.fill(0);
+					this.text("It's burning! Take it out!", 230, 300);
+				}
 				this.textSize(35);
 				this.fill(0);
 				this.text("Press O to remove your masterpiece", 230, 230);
