@@ -115,13 +115,16 @@ public class ChefTime extends PApplet {
 	 */
 	public int countNumberOfWrongIngredients() {
 		int count = 0;
-		for (int i=0; i<recipeIngredients.size();i++) {
-			if (addedIngredients.size() != 0 && !addedIngredients.get(i).equals(recipeIngredients.get(i)) ) {
+		for (int i=0; i<addedIngredients.size();i++) {
+			if (addedIngredients.size() != 0 && i < recipeIngredients.size() && !addedIngredients.get(i).equals(recipeIngredients.get(i)) ) {
 				count++;
 			}
 			if (addedIngredients.size() == 0) {
 				count = recipeIngredients.size();
 			}
+		}
+		if (addedIngredients.size() != recipeIngredients.size()) {
+			count += Math.abs(recipeIngredients.size() - addedIngredients.size());
 		}
 		//System.out.println("Wrong number of Ingredients: " + count);
 		return count;
@@ -140,6 +143,10 @@ public class ChefTime extends PApplet {
 	// program is stopped. Each statement is executed in
 	// sequence and after the last line is read, the first
 	// line is executed again.
+	/**
+	 * Draws a new instance of ChefTime, drawing different screens such as the title screen, instruction screen,
+	 * game screen, and score screen.
+	 */
 	public void draw() {
 		background(255); // Clear the screen with a white background
 		if (screen == 4) {
@@ -291,7 +298,14 @@ public class ChefTime extends PApplet {
 			circleOver = rectOver = false;
 		}
 	}
-
+/**
+ * Checks to see if the cursor is over the square button of the oven.
+ * @param x The x coordinate of the oven's square button
+ * @param y The y coordinate of the oven's square button
+ * @param width The width of the oven's square button
+ * @param height The height of the oven's square button
+ * @return true if the cursor is over the square button
+ */
 	boolean overRect(int x, int y, int width, int height) {
 		if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height) {
 			return true;
@@ -299,7 +313,13 @@ public class ChefTime extends PApplet {
 			return false;
 		}
 	}
-
+/**
+ * Checks to see if the cursor is over the circle button of the oven.
+ * @param x The x coordinate of the oven's circle button
+ * @param y The y coordinate of the oven's circle button
+ * @param diameter The diameter of the oven's circle button
+ * @return true if the cursor is over the circle button
+ */
 	boolean overCircle(int x, int y, int diameter) {
 		float disX = x - mouseX;
 		float disY = y - mouseY;
@@ -309,7 +329,6 @@ public class ChefTime extends PApplet {
 			return false;
 		}
 	}
-	
 	
 
 	public void mousePressed(MouseEvent e) {
@@ -330,7 +349,7 @@ public class ChefTime extends PApplet {
 				this.textSize(35);
 				this.fill(0);
 				this.text("Press O to remove your masterpiece", 230, 230);
-				countNumberOfWrongIngredients();
+				//countNumberOfWrongIngredients();
 				oven.getBakingScore();
 			}
 			
@@ -364,9 +383,9 @@ public class ChefTime extends PApplet {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-	//	currentDrag.isInBowl(e.getX(), e.getY());
+
 		if (currentDrag != null && currentDrag.isInBowl(e.getX(), e.getY()) ) {
-			//bowlimg = loadImage("batter.png");
+
 			bowl.fillBowl(loadImage("batter.png"));
 			currentDrag.hideImage();
 			addedIngredients.add(currentDrag.getName());
@@ -387,9 +406,7 @@ public class ChefTime extends PApplet {
 		}
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		int code = e.getKeyCode();
 		if (code == 'I') {
 			if (screen == 0) {

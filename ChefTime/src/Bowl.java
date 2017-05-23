@@ -64,7 +64,12 @@ public class Bowl {
 		height = height/2;
 		inOven = true;
 	}
-	
+	/**
+	 *Sets the coordinates of the Bowl to the original coordinates of the bowl
+	 *when it's outside the oven.
+	 *@post The x and y coordinates of the Bowl changes, as well as its 
+	 *width and height.
+	 */
 	public void moveOutOven() {
 		x = xOven;
 		y = yOven;
@@ -72,10 +77,17 @@ public class Bowl {
 		height = height*2;
 		inOven = false;
 	}
-	
+	/**
+	 * Checks to see whether the Bowl is in the oven.
+	 * @return true if the Bowl is in the oven.
+	 */
 	public boolean isInOven() {
 		return inOven;
 	}
+	/**
+	 * Draws an instance of a Bowl object using the image, coordinates, and width and height fields.
+	 * @param drawer The marker used to draw the Bowl.
+	 */
 	public void draw(PApplet drawer) {
 		drawer.image(img, x, y, width, height);
 
