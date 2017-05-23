@@ -29,7 +29,14 @@ public class Milk extends Ingredient implements ActionListener {
 	 // Load the sounds from the disk. 
 	 private final Sound milkSound = new Sound("sploosh.wav");
 	 
-
+	 /**
+	  * 
+	  * @param img
+	  * @param x
+	  * @param y
+	  * @param width
+	  * @param height
+	  */
 	 
 	 public Milk(PImage img, int x, int y, int width, int height) {
 			super(img, x, y, width, height);

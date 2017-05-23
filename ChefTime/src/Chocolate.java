@@ -30,7 +30,14 @@ public class Chocolate extends Ingredient implements ActionListener {
 	 // Load the sounds from the disk. 
 	 private final Sound chocSound = new Sound("sploosh.wav");
 	 
-
+	 /**
+	  * 
+	  * @param img: png of chocolate
+	  * @param x: x - coordinate of top left corner of image
+	  * @param y: y - coordinate of top left corner of image
+	  * @param width: width of image
+	  * @param height: height of image
+	  */
 	 
 	 public Chocolate(PImage img, int x, int y, int width, int height) {
 			super(img, x, y, width, height);
@@ -47,6 +54,9 @@ public class Chocolate extends Ingredient implements ActionListener {
 	  /*
 	   * Chocolate is dropped into bowl.
 	   */
+	  /**
+	   * plays sound and restarts action timer when chocolate is released
+	   */
 	  public void released() {
 		  if (action == 0) {
 			  action = 1;
@@ -58,12 +68,16 @@ public class Chocolate extends Ingredient implements ActionListener {
 	  /*
 	   * Draw egg using the correct sprite.
 	   */
+	  
 	  public void draw(Graphics2D g2, ImageObserver io) {
 		 // double xScale = (double)width / sprite[0].width;
 		 // double yScale = (double)height / sprite[0].height;
 		 // g2.drawImage(egg, x,(int)(y-yScale*sprite[action].height),(int)(x+xScale*sprite[action].width),y,sprite[action].x,sprite[action].y,sprite[action].x+sprite[action].width,sprite[action].y+sprite[action].height(),io);
 	  }
 
+	  /**
+	   * set action to 0 and clears the image
+	   */
 	  public void actionPerformed(ActionEvent arg0){
 		  still();
 		  surface.repaint();
